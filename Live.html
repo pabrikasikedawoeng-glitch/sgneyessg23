@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SGN Eyes SG23 PG Kedawoeng</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* DESKTOP: layar penuh tanpa scroll */
+    html, body {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    body {
+        background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+        color: #fff;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* HEADER */
+    .header {
+        flex-shrink: 0;
+        text-align: center;
+        padding: 15px 20px;
+        background: linear-gradient(90deg, rgba(255,107,107,0.1), rgba(78,84,200,0.15), rgba(14,165,233,0.1));
+        border-radius: 12px;
+        margin-bottom: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .header h1 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #44a3ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .header .subtitle {
+        font-size: 0.85rem;
+        color: #a0a0c0;
+        margin-top: 4px;
+        letter-spacing: 1.5px;
+    }
+
+    .live-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 8px;
+        font-size: 0.8rem;
+        color: #ff4757;
+        font-weight: 600;
+    }
+
+    .live-dot {
+        width: 8px;
+        height: 8px;
+        background: #ff4757;
+        border-radius: 50%;
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); }
+        50% { box-shadow: 0 0 0 8px rgba(255, 71, 87, 0); }
+    }
+
+    /* GRID CONTAINER */
+    .grid-container {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 15px;
+        min-height: 0;
+    }
+
+    .grid-item {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+        min-height: 0;
+    }
+
+    .grid-item:hover {
+        border-color: rgba(78, 205, 196, 0.4);
+        box-shadow: 0 0 20px rgba(78, 205, 196, 0.1);
+    }
+
+    .grid-title {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 8px 15px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        flex-shrink: 0;
+    }
+
+    .grid-title .cam-status {
+        font-size: 0.65rem;
+        color: #4ecdc4;
+        padding: 2px 8px;
+        background: rgba(78, 205, 196, 0.1);
+        border-radius: 10px;
+        font-weight: 500;
+    }
+
+    .stream-frame {
+        flex: 1;
+        width: 100%;
+        border: none;
+        background: #000;
+        min-height: 0;
+    }
+
+    /* FOOTER */
+    .footer {
+        flex-shrink: 0;
+        text-align: center;
+        padding: 12px 0;
+        margin-top: 15px;
+        color: #8080a0;
+        font-size: 0.8rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer .signature {
+        color: #4ecdc4;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        font-family: 'Consolas', 'Courier New', monospace;
+    }
+
+    /* =========================================
+       RESPONSIVE - TABLET & HP (SCROLL AKTIF!)
+       ========================================= */
+    @media (max-width: 1024px) {
+        html, body {
+            height: auto !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+        }
+        body {
+            min-height: 100vh;
+        }
+        .header h1 { font-size: 1.4rem; }
+        .grid-container {
+            flex: none;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 280px);
+            min-height: auto;
+        }
+    }
+
+    @media (max-width: 640px) {
+        html, body {
+            height: auto !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+        }
+        body {
+            padding: 10px;
+            min-height: 100vh;
+        }
+        .header {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+        }
+        .header h1 { font-size: 1.1rem; }
+        .header .subtitle { font-size: 0.75rem; }
+        .grid-container {
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(6, 240px);
+            gap: 10px;
+        }
+        .grid-title {
+            font-size: 0.8rem;
+            padding: 6px 12px;
+        }
+        .footer {
+            font-size: 0.7rem;
+            padding: 10px 0;
+            margin-top: 10px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>SGN Eyes SG23 PG Kedawoeng</h1>
+    <div class="subtitle">Stream Monitoring Giling</div>
+    <div class="live-indicator">
+        <span class="live-dot"></span>
+        <span>LIVE STREAM</span>
+    </div>
+</div>
+
+<div class="grid-container">
+    <div class="grid-item">
+        <div class="grid-title">
+            <span>📹 Meja Tebu</span>
+            <span class="cam-status">● ONLINE</span>
+        </div>
+        <iframe class="stream-frame" src="http://sg-6.hostddns.us:47965/stream.html?src=mejatebu" allowfullscreen></iframe>
+    </div>
+
+    <div class="grid-item">
+        <div class="grid-title">
+            <span>📹 Gilingan</span>
+            <span class="cam-status">● ONLINE</span>
+        </div>
+        <iframe class="stream-frame" src="http://sg-6.hostddns.us:47965/stream.html?src=gilingan" allowfullscreen></iframe>
+    </div>
+
+    <div class="grid-item">
+        <div class="grid-title">
+            <span>📹 Emplasement</span>
+            <span class="cam-status">● ONLINE</span>
+        </div>
+        <iframe class="stream-frame" src="http://sg-6.hostddns.us:47965/stream.html?src=emplasement" allowfullscreen></iframe>
+    </div>
+
+    <div class="grid-item">
+        <div class="grid-title">
+            <span>📹 Timbangan</span>
+            <span class="cam-status">● ONLINE</span>
+        </div>
+        <iframe class="stream-frame" src="http://sg-6.hostddns.us:47965/stream.html?src=timbangan" allowfullscreen></iframe>
+    </div>
+
+    <div class="grid-item">
+        <div class="grid-title">
+            <span>📹 Stamp Floor</span>
+            <span class="cam-status">● ONLINE</span>
+        </div>
+        <iframe class="stream-frame" src="http://sg-6.hostddns.us:47965/stream.html?src=stampfloor" allowfullscreen></iframe>
+    </div>
+
+    <div class="grid-item">
+        <div class="grid-title">
+            <span>📹 Gudang</span>
+            <span class="cam-status">● ONLINE</span>
+        </div>
+        <iframe class="stream-frame" src="http://sg-6.hostddns.us:47965/stream.html?src=gudang" allowfullscreen></iframe>
+    </div>
+</div>
+
+<div class="footer">
+    &copy; 2026 SGN Eyes Monitoring System &nbsp;|&nbsp; Created by : joe_wd@kdw2026</span>
+</div>
+
+</body>
+</html>
